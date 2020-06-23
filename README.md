@@ -20,7 +20,7 @@ py main.py
 ## Sample
 
 <p align="center">
-  <a href="https://github.com/kivy-gif">
+  <a href="https://github.com/KivyBrazil/kivy-gif">
     <img src=".github/demo.gif" alt="Kivy Gif">
   </a>
 </p>
