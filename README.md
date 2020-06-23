@@ -6,6 +6,8 @@ Um repositório onde encontramos funções para trabalhar com gifs.
 python >= 3.7
 
 kivy >= 1.11.1
+
+opencv-python >= 4.2.0.34
 ```
 
 ## How To Run
