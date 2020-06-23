@@ -30,18 +30,16 @@ class Gif(Widget):
     def __init__(self, **kwargs):
         super(Gif, self).__init__(**kwargs)
         Clock.schedule_once(self.start)
-    
+
     def start(self, evt):
         Clock.schedule_once(self.get_gif)
-            
+
     def load_image(self, file_path):
         file_path = resource_find(file_path)
         filename, file_extension = os.path.splitext(file_path)
         file_extension = file_extension[1:].lower()
         self._gif_frames = list()
-        im = None
-        img_qtd = 0
-        
+
         # open a image resized with the window size
         if file_extension in ['png', 'jpg', 'jpeg']:
             self._number_of_frames = 1
@@ -49,7 +47,6 @@ class Gif(Widget):
             self.gif_np = cv2.cvtColor(self.gif_np, cv2.COLOR_BGRA2RGBA)
             self.gif_np = cv2.resize(self.gif_np, Window.size)
             size = self.gif_np.shape[0:2]
-            # self.gif_np = cv2.flip(self.gif_np, 0)
             data = self.gif_np.tostring()
             texture = Texture.create(size=size, colorfmt="rgba")
             texture.blit_buffer(data, bufferfmt="ubyte", colorfmt="rgba")
@@ -62,9 +59,9 @@ class Gif(Widget):
                 # each frame is a numpy matrix
                 size = frame.shape[0:2]
                 texture = Texture.create(size=size, colorfmt="rgba")
-                self._gif_frames.append(texture)
                 data = frame.tostring()
                 texture.blit_buffer(data, bufferfmt="ubyte", colorfmt="rgba")
+                self._gif_frames.append(texture)
 
     def get_gif(self, evt):
         if not self.source:
@@ -88,10 +85,10 @@ class Gif(Widget):
         try:
             self._texture = self._gif_frames[int(index)]
         except:
-            ...
+            pass
 
 class MyGifVideo(Factory.ButtonBehavior, Gif):
-    ...
+    pass
 
 class Home(Factory.BoxLayout):
     orientation = "vertical"
@@ -129,8 +126,8 @@ class GifApp(App):
 Home:
     MyGifVideo:
         id: myimage
-        source: "test1.jpg"
-        # source: "test.gif"
+        # source: "test1.jpg"
+        source: "test.gif"
         size_hint: [1, .9]
         on_release:
             self.start_gif()
